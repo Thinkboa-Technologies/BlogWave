@@ -99,6 +99,3 @@ BlogWave/
 ├── others
 └── README.txt
 
-├── index.php
-├── logout.php
-└── README.md
