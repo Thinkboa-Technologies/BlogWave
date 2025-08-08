@@ -12,7 +12,7 @@
 
 <body>
     <footer class="bg-dark text-light text-center py-4 mt-5 position-relative">
-        <p class="mb-2">&copy; 2025 all rights are reserved by Blogwave.</p>
+        <p class="mb-2">&copy; 2025 all rights are reserved by Blogwave. || Design and Developed by Shakti</p>
 
         <!-- Social Icons -->
         <div class="mb-3">
