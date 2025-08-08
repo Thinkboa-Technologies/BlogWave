@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
 if (!empty($search)) {
-    $stmt = $conn->prepare("SELECT id, title, blog, image_url, created_at FROM posts 
+    $stmt = $conn->prepare("SELECT id, title, blog, author_name, image_url, created_at FROM posts 
                             WHERE title LIKE ? OR blog LIKE ? 
                             ORDER BY id DESC");
     $searchTerm = "%$search%";
@@ -20,7 +20,7 @@ if (!empty($search)) {
     $stmt->execute();
     $result = $stmt->get_result();
 } else {
-    $sql = "SELECT id, title, blog, image_url, created_at FROM posts ORDER BY id DESC";
+    $sql = "SELECT id, title, blog, author_name, image_url, created_at FROM posts ORDER BY id DESC";
     $result = $conn->query($sql);
 }
 ?>
@@ -65,11 +65,12 @@ if (!empty($search)) {
                                 <p class="card-text"><?= nl2br(htmlspecialchars(substr($row['blog'], 0, 100))); ?><?= strlen($row['blog']) > 100 ? '...' : ''; ?>
                                     <a href="view_post.php?id=<?= urlencode($row['id']); ?>" class="mt-auto">Read More</a>
                                 </p>
-                                <p><small class="text-muted float-end">
-                                        <?= date("M j, Y \\a\\t g:i A", strtotime($row['created_at'])) ?>
-                                    </small></p>
-
-
+                                <div class="card-bottom d-flex mb-1 justify-content-between mb-2">
+                                    <p><small><i class="fa-solid fa-pen"></i>Author : <?= htmlspecialchars($row['author_name']); ?></small></p>
+                                    <p class="float-end"><small class="text-muted ">
+                                            <?= date("M j, Y \\a\\t g:i A", strtotime($row['created_at'])) ?>
+                                        </small></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -81,9 +82,7 @@ if (!empty($search)) {
             <?php endif; ?>
         </div>
     </div>
-
     <?php include 'includes/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

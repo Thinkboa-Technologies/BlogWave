@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 $sql = "SELECT id, about_title, about_content FROM about_section";
 $result = $conn->query($sql);
 
-$sql2 = "SELECT id, title, blog, image_url, created_at FROM posts ORDER BY id DESC Limit 3";
+$sql2 = "SELECT id, title, blog, author_name, image_url, created_at FROM posts ORDER BY id DESC Limit 3";
 $post = $conn->query($sql2);
 ?>
 <!DOCTYPE html>
@@ -71,10 +71,12 @@ $post = $conn->query($sql2);
                                 <p class="card-text"><?= nl2br(htmlspecialchars(substr($row['blog'], 0, 50))); ?><?= strlen($row['blog']) > 50 ? '...' : ''; ?>
                                     <a href="view_post.php?id=<?= urlencode($row['id']); ?>" class="mt-auto">Read More</a>
                                 </p>
-                                <p><small class="text-muted float-end">
+                                <div class="card-bottom d-flex mb-1 justify-content-between mb-2">
+                                <p><small><i class="fa-solid fa-pen"></i>Author : <?= htmlspecialchars($row['author_name'])?></small></p>
+                                <p class="float-end"><small class="text-muted ">
                                         <?= date("M j, Y \\a\\t g:i A", strtotime($row['created_at'])) ?>
                                     </small></p>
-
+                                </div>
                             </div>
                         </div>
                     </div>

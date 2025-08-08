@@ -11,6 +11,7 @@ include 'includes/db.php';
 if (isset($_POST['submit'])) {
     $title = trim($_POST['title']);
     $blog = trim($_POST['blog']);
+    $author = trim($_POST['author']);
     $image_url = $_FILES['image_url'];
 
     // Validate image
@@ -29,8 +30,8 @@ if (isset($_POST['submit'])) {
         die("Only JPG, PNG, JPEG, and GIF are allowed.");
     }
     if (move_uploaded_file($image_url["tmp_name"], $targetFile)) {
-        $stmt = $conn->prepare("INSERT INTO posts (title, blog, image_url) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $title, $blog, $targetFile);
+        $stmt = $conn->prepare("INSERT INTO posts (title, blog, author_name, image_url) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $title, $blog, $author, $targetFile);
         $stmt->execute();
         echo "<script>alert('Upload successful!'); window.location.href='blog.php';</script>";
     } else {

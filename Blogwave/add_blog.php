@@ -40,6 +40,10 @@ if (!isset($_SESSION['id'])) {
                 <label class="form-label">image</label>
                 <input type="file" name="image_url" class="form-control" required>
             </div>
+            <div class="mb-3">
+                <label class="form-label">Author Name</label>
+                <input type="text" name="author" id="author" class="form-control" required>
+            </div>
 
             <div class="mb-3">
                 <label class="form-label"> Blog</label>
